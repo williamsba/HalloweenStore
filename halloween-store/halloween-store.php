@@ -141,8 +141,8 @@ function halloween_store_register_settings() {
 
 function halloween_sanitize_options( $options ) {
 	
-	$options['show_inventory'] = ( ! empty( $options['show_inventory'] ) ) ? strip_tags( $options['show_inventory'] ) : '';
-	$options['currency_sign'] = ( ! empty( $options['currency_sign'] ) ) ? strip_tags( $options['currency_sign'] ) : '';
+	$options['show_inventory'] = ( ! empty( $options['show_inventory'] ) ) ? sanitize_text_field( $options['show_inventory'] ) : '';
+	$options['currency_sign'] = ( ! empty( $options['currency_sign'] ) ) ? sanitize_text_field( $options['currency_sign'] ) : '';
 	
 	return $options;
 	
@@ -218,11 +218,11 @@ function halloween_store_save_meta_box( $post_id ) {
 		check_admin_referer( 'meta-box-save', 'halloween-plugin' );
 
 		// save the meta box data as post metadata
-		update_post_meta( $post_id, '_halloween_product_sku', strip_tags( $_POST['halloween_product_sku'] ) );
-		update_post_meta( $post_id, '_halloween_product_price', strip_tags( $_POST['halloween_product_price'] ) );
-		update_post_meta( $post_id, '_halloween_product_weight', strip_tags( $_POST['halloween_product_weight'] ) );
-		update_post_meta( $post_id, '_halloween_product_color', strip_tags( $_POST['halloween_product_color'] ) );
-		update_post_meta( $post_id, '_halloween_product_inventory',strip_tags( $_POST['halloween_product_inventory'] ) );
+		update_post_meta( $post_id, '_halloween_product_sku', sanitize_text_field( $_POST['halloween_product_sku'] ) );
+		update_post_meta( $post_id, '_halloween_product_price', sanitize_text_field( $_POST['halloween_product_price'] ) );
+		update_post_meta( $post_id, '_halloween_product_weight', sanitize_text_field( $_POST['halloween_product_weight'] ) );
+		update_post_meta( $post_id, '_halloween_product_color', sanitize_text_field( $_POST['halloween_product_color'] ) );
+		update_post_meta( $post_id, '_halloween_product_inventory',sanitize_text_field( $_POST['halloween_product_inventory'] ) );
 
 	}
 	
@@ -314,7 +314,7 @@ class hs_widget extends WP_Widget {
     function update( $new_instance, $old_instance ) {
 		
         $instance = $old_instance;
-        $instance['title'] = strip_tags( $new_instance['title'] );
+        $instance['title'] = sanitize_text_field( $new_instance['title'] );
         $instance['number_products'] = absint( $new_instance['number_products'] );
 
         return $instance;
