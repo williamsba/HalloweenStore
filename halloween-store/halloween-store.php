@@ -282,13 +282,12 @@ function halloween_store_register_widgets() {
 class hs_widget extends WP_Widget {
 
     //process our new widget
-    function hs_widget() {
-		
+    public function __construct() {
         $widget_ops = array(
-			'classname'   => 'hs-widget-class',
-			'description' => __( 'Display Halloween Products','halloween-plugin' ) );
-        $this->WP_Widget( 'hs_widget', __( 'Products Widget','halloween-plugin'), $widget_ops );
-		
+            'classname' => 'hs-widget-class',
+            'description' => __('Display Halloween Products','halloween-plugin'),
+        );
+        parent::__construct( 'hs_widget', __( 'Products Widget', 'halloween-plugin'), $widget_ops);
     }
 
     //build our widget settings form
